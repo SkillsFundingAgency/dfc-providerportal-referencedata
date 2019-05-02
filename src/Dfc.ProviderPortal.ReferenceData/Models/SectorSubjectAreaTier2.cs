@@ -1,7 +1,5 @@
 ﻿using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Dfc.ProviderPortal.ReferenceData.Models
 {
