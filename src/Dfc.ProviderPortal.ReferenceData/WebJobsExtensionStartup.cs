@@ -33,6 +33,8 @@ namespace Dfc.ProviderPortal.ReferenceData
             builder.Services.AddScoped<IStandardSectorCodeService, StandardSectorCodeService>();
             builder.Services.AddScoped<ISectorSubjectAreaTier1Service, SectorSubjectAreaTier1Service>();
             builder.Services.AddScoped<ISectorSubjectAreaTier2Service, SectorSubjectAreaTier2Service>();
+            builder.Services.AddScoped<IApprenticeshipStandardService, ApprenticeshipStandardService>();
+            builder.Services.AddScoped<IApprenticeshipFrameworkService, ApprenticeshipFrameworkService>();
         }
     }
 }
