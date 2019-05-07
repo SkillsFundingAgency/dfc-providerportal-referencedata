@@ -19,9 +19,10 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
             ILogger log,
             [Inject] IProgTypeService progTypeService)
         {
-            var results = await progTypeService.GetAllAsync();
+            var result = await progTypeService.GetAllAsync();
+            if (result == null) return new NotFoundResult();
 
-            return new JsonResult(results, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
+            return new JsonResult(result, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
         }
     }
 }

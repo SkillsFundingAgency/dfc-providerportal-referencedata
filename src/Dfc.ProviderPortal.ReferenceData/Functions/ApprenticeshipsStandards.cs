@@ -19,9 +19,10 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
             ILogger log,
             [Inject] IApprenticeshipStandardService apprenticeshipStandardService)
         {
-            var results = await apprenticeshipStandardService.GetAllAsync();
+            var result = await apprenticeshipStandardService.GetAllAsync();
+            if (result == null) return new NotFoundResult();
 
-            return new JsonResult(results, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
+            return new JsonResult(result, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
         }
     }
 }

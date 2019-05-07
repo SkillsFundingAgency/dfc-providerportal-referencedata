@@ -19,9 +19,10 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
             ILogger log,
             [Inject] ISectorSubjectAreaTier2Service sectorSubjectAreaTier2Service)
         {
-            var results = await sectorSubjectAreaTier2Service.GetAllAsync();
+            var result = await sectorSubjectAreaTier2Service.GetAllAsync();
+            if (result == null) return new NotFoundResult();
 
-            return new JsonResult(results, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
+            return new JsonResult(result, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
         }
     }
 }
