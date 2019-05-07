@@ -7,8 +7,8 @@ namespace Dfc.ProviderPortal.ReferenceData.Models
     {
         public Guid Id { get; set; }
         public int UPIN { get; set; }
-        public double LearnerSatisfaction { get; set; }
-        public double EmployerSatisfaction { get; set; }
+        public decimal LearnerSatisfaction { get; set; }
+        public decimal EmployerSatisfaction { get; set; }
         public DateTime? CreatedDateTimeUtc { get; set; }
     }
 }

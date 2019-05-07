@@ -6,8 +6,8 @@ namespace Dfc.ProviderPortal.ReferenceData.Interfaces
     {
         Guid Id { get; }
         int UPIN { get; }
-        double LearnerSatisfaction { get; }
-        double EmployerSatisfaction { get; }
+        decimal LearnerSatisfaction { get; }
+        decimal EmployerSatisfaction { get; }
         DateTime? CreatedDateTimeUtc { get; }
     }
 }
