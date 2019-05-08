@@ -1,7 +1,9 @@
 ﻿using Dfc.ProviderPortal.Packages.AzureFunctions.DependencyInjection;
 using Dfc.ProviderPortal.ReferenceData;
+using Dfc.ProviderPortal.ReferenceData.Helpers;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Services;
+using Dfc.ProviderPortal.ReferenceData.Settings;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +30,9 @@ namespace Dfc.ProviderPortal.ReferenceData
             builder.Services.AddApplicationInsightsTelemetry(configuration);
 
             builder.Services.AddSingleton<IConfiguration>(configuration);
+            builder.Services.Configure<CosmosDbSettings>(configuration.GetSection(nameof(CosmosDbSettings)));
+            builder.Services.Configure<CosmosDbCollectionSettings>(configuration.GetSection(nameof(CosmosDbCollectionSettings)));
+            builder.Services.AddScoped<ICosmosDbHelper, CosmosDbHelper>();
             builder.Services.AddScoped<IProgTypeService, ProgTypeService>();
             builder.Services.AddScoped<IFeChoiceService, FeChoiceService>();
             builder.Services.AddScoped<IStandardSectorCodeService, StandardSectorCodeService>();
