@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,32 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
     [ApiController]
     public class ReferenceDataController : ControllerBase
     {
+        private readonly IFeChoiceService _feChoiceService;
+        private readonly IProgTypeService _progTypeService;
+        private readonly ISectorSubjectAreaTier1Service _sectorSubjectAreaTier1Service;
+        private readonly ISectorSubjectAreaTier2Service _sectorSubjectAreaTier2Service;
+        private readonly IStandardSectorCodeService _standardSectorCodeService;
+        private readonly IApprenticeshipFrameworkService _apprenticeshipFrameworkService;
+        private readonly IApprenticeshipStandardService _apprenticeshipStandardService;
+
+        public ReferenceDataController(
+            IFeChoiceService feChoiceService,
+            IProgTypeService progTypeService,
+            ISectorSubjectAreaTier1Service sectorSubjectAreaTier1Service,
+            ISectorSubjectAreaTier2Service sectorSubjectAreaTier2Service,
+            IStandardSectorCodeService standardSectorCodeService,
+            IApprenticeshipFrameworkService apprenticeshipFrameworkService,
+            IApprenticeshipStandardService apprenticeshipStandardService)
+        {
+            _feChoiceService = feChoiceService;
+            _progTypeService = progTypeService;
+            _sectorSubjectAreaTier1Service = sectorSubjectAreaTier1Service;
+            _sectorSubjectAreaTier2Service = sectorSubjectAreaTier2Service;
+            _standardSectorCodeService = standardSectorCodeService;
+            _apprenticeshipFrameworkService = apprenticeshipFrameworkService;
+            _apprenticeshipStandardService = apprenticeshipStandardService;
+        }
+
         [Route("fe-choices")]
         [HttpGet]
         public ActionResult<IEnumerable<FeChoice>> FeChoicesGetAll()

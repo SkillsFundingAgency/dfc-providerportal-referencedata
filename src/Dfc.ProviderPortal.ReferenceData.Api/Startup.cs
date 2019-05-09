@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dfc.ProviderPortal.ReferenceData.Helpers;
+using Dfc.ProviderPortal.ReferenceData.Interfaces;
+using Dfc.ProviderPortal.ReferenceData.Services;
+using Dfc.ProviderPortal.ReferenceData.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,9 +36,20 @@ namespace Dfc.ProviderPortal.ReferenceData.Api
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
+            services.Configure<CosmosDbSettings>(Configuration.GetSection(nameof(CosmosDbSettings)));
+            services.Configure<CosmosDbCollectionSettings>(Configuration.GetSection(nameof(CosmosDbCollectionSettings)));
+            services.AddScoped<ICosmosDbHelper, CosmosDbHelper>();
+            services.AddScoped<IProgTypeService, ProgTypeService>();
+            services.AddScoped<IFeChoiceService, FeChoiceService>();
+            services.AddScoped<IStandardSectorCodeService, StandardSectorCodeService>();
+            services.AddScoped<ISectorSubjectAreaTier1Service, SectorSubjectAreaTier1Service>();
+            services.AddScoped<ISectorSubjectAreaTier2Service, SectorSubjectAreaTier2Service>();
+            services.AddScoped<IApprenticeshipStandardService, ApprenticeshipStandardService>();
+            services.AddScoped<IApprenticeshipFrameworkService, ApprenticeshipFrameworkService>();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Apprenticeship Reference Data API", Version = "v1" });
             });
         }
 
@@ -54,7 +69,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Apprenticeship Reference Data API");
             });
 
             app.UseHttpsRedirection();
