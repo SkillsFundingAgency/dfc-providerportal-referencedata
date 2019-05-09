@@ -34,7 +34,7 @@ steps:
   displayName: dotnet publish
   inputs:
     command: publish
-    projects: 'src/Dfc.ProviderPortal.ReferenceData.Api/Dfc.ProviderPortal.ReferenceData.Api.csproj'
+    projects: 'src/Dfc.ProviderPortal.ReferenceData/Dfc.ProviderPortal.ReferenceData.csproj'
     configuration: ${{ variables.buildConfiguration }}
     arguments: '--output $(Build.ArtifactStagingDirectory)'
     publishWebProjects: false
@@ -44,4 +44,4 @@ steps:
   displayName: Publish Artifact
   inputs:
      pathtoPublish: $(Build.ArtifactStagingDirectory)
-     artifactName: Dfc.ProviderPortal.ReferenceData.Api
+     artifactName: Dfc.ProviderPortal.ReferenceData
