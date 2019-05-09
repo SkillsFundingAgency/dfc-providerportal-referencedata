@@ -2,8 +2,8 @@
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Models;
 using Dfc.ProviderPortal.ReferenceData.Settings;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,15 +34,22 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
 
         public Task<IEnumerable<ProgType>> GetAllAsync()
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ProgType>>(STUB_JSON_DATA);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.ProgTypesCollectionId);
+            var sql = $"SELECT * FROM c";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ProgType>(uri, sql, options).AsEnumerable();
             return Task.FromResult(results);
         }
 
         public Task<ProgType> GetByProgTypeIdAsync(int progTypeId)
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ProgType>>(STUB_JSON_DATA);
-            var found = results.FirstOrDefault(x => x.ProgTypeId == progTypeId);
-            return Task.FromResult(found);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.ProgTypesCollectionId);
+            var sql = $"SELECT * FROM c WHERE c.ProgTypeId = {progTypeId}";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ProgType>(uri, sql, options).FirstOrDefault();
+            return Task.FromResult(results);
         }
     }
 }

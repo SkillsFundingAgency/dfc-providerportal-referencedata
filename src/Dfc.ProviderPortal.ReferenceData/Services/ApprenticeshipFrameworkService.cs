@@ -2,8 +2,8 @@
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Models;
 using Dfc.ProviderPortal.ReferenceData.Settings;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,29 +34,42 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
 
         public Task<IEnumerable<ApprenticeshipFramework>> GetAllAsync()
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ApprenticeshipFramework>>(STUB_JSON_DATA);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.FrameworksCollectionId);
+            var sql = $"SELECT * FROM c";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ApprenticeshipFramework>(uri, sql, options).AsEnumerable();
             return Task.FromResult(results);
         }
 
         public Task<IEnumerable<ApprenticeshipFramework>> GetApprenticeshipFrameworkByFrameworkCodeAndProgTypeIdAsync(int frameworkCode, int progTypeId)
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ApprenticeshipFramework>>(STUB_JSON_DATA);
-            var found = results.Where(x => x.FrameworkCode == frameworkCode && x.ProgType == progTypeId);
-            return Task.FromResult(found);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.FrameworksCollectionId);
+            var sql = $"SELECT * FROM c WHERE c.FrameworkCode = {frameworkCode} AND c.ProgType = {progTypeId}";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ApprenticeshipFramework>(uri, sql, options).AsEnumerable();
+            return Task.FromResult(results);
         }
 
         public Task<ApprenticeshipFramework> GetApprenticeshipFrameworkByFrameworkCodeAndProgTypeIdAndPathwayCodeAsync(int frameworkCode, int progTypeId, int pathwayCode)
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ApprenticeshipFramework>>(STUB_JSON_DATA);
-            var found = results.FirstOrDefault(x => x.FrameworkCode == frameworkCode && x.ProgType == progTypeId && x.PathwayCode == pathwayCode);
-            return Task.FromResult(found);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.FrameworksCollectionId);
+            var sql = $"SELECT * FROM c WHERE c.FrameworkCode = {frameworkCode} AND c.ProgType = {progTypeId} AND c.PathwayCode = {pathwayCode}";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ApprenticeshipFramework>(uri, sql, options).FirstOrDefault();
+            return Task.FromResult(results);
         }
 
         public Task<IEnumerable<ApprenticeshipFramework>> GetApprenticeshipFrameworkByFrameworkCodeAsync(int frameworkCode)
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ApprenticeshipFramework>>(STUB_JSON_DATA);
-            var found = results.Where(x => x.FrameworkCode == frameworkCode);
-            return Task.FromResult(found);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.FrameworksCollectionId);
+            var sql = $"SELECT * FROM c WHERE c.FrameworkCode = {frameworkCode}";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ApprenticeshipFramework>(uri, sql, options).AsEnumerable();
+            return Task.FromResult(results);
         }
     }
 }
