@@ -43,5 +43,5 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: Publish Artifact
   inputs:
-     pathtoPublish: $(Build.ArtifactStagingDirectory)
+     pathtoPublish: '$(Build.ArtifactStagingDirectory)/Dfc.ProviderPortal.ReferenceData'
      artifactName: Dfc.ProviderPortal.ReferenceData
