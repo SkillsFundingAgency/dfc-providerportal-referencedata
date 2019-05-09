@@ -2,8 +2,8 @@
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Models;
 using Dfc.ProviderPortal.ReferenceData.Settings;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,22 +34,32 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
 
         public Task<IEnumerable<ApprenticeshipStandard>> GetAllAsync()
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ApprenticeshipStandard>>(STUB_JSON_DATA);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.StandardsCollectionId);
+            var sql = $"SELECT * FROM c";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ApprenticeshipStandard>(uri, sql, options).AsEnumerable();
             return Task.FromResult(results);
         }
 
         public Task<ApprenticeshipStandard> GetApprenticeshipStandardByStandardCodeAndVersionAsync(int standardCode, int version)
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ApprenticeshipStandard>>(STUB_JSON_DATA);
-            var found = results.FirstOrDefault(x => x.StandardCode == standardCode && x.Version == version);
-            return Task.FromResult(found);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.StandardsCollectionId);
+            var sql = $"SELECT * FROM c WHERE c.StandardCode = {standardCode} AND c.Version = {version}";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ApprenticeshipStandard>(uri, sql, options).FirstOrDefault();
+            return Task.FromResult(results);
         }
 
         public Task<IEnumerable<ApprenticeshipStandard>> GetApprenticeshipStandardByStandardCodeAsync(int standardCode)
         {
-            var results = JsonConvert.DeserializeObject<IEnumerable<ApprenticeshipStandard>>(STUB_JSON_DATA);
-            var found = results.Where(x => x.StandardCode == standardCode);
-            return Task.FromResult(found);
+            var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.StandardsCollectionId);
+            var sql = $"SELECT * FROM c WHERE c.StandardCode = {standardCode}";
+            var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
+            var client = _cosmosDbHelper.GetClient();
+            var results = client.CreateDocumentQuery<ApprenticeshipStandard>(uri, sql, options).AsEnumerable();
+            return Task.FromResult(results);
         }
     }
 }
