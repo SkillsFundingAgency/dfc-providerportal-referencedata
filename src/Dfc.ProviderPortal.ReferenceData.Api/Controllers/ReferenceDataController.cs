@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dfc.ProviderPortal.ReferenceData.Interfaces;
+﻿using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
 {
@@ -54,7 +53,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
 
                 return Ok(result);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

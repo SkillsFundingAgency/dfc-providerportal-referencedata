@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dfc.ProviderPortal.ReferenceData.Helpers;
+﻿using Dfc.ProviderPortal.ReferenceData.Helpers;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Services;
 using Dfc.ProviderPortal.ReferenceData.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Dfc.ProviderPortal.ReferenceData.Api
 {
