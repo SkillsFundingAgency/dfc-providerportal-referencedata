@@ -38,10 +38,10 @@ steps:
     configuration: ${{ variables.buildConfiguration }}
     arguments: '--output $(Build.ArtifactStagingDirectory)'
     publishWebProjects: false
-    zipAfterPublish: false
+    zipAfterPublish: true
 
 - task: PublishBuildArtifacts@1
   displayName: Publish Artifact
   inputs:
-     pathtoPublish: '$(Build.ArtifactStagingDirectory)/Dfc.ProviderPortal.ReferenceData'
+     pathtoPublish: $(Build.ArtifactStagingDirectory)
      artifactName: Dfc.ProviderPortal.ReferenceData
