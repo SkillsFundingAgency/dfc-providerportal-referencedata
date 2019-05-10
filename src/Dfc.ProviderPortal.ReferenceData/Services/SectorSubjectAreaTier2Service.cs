@@ -48,7 +48,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
             var sql = $"SELECT * FROM c WHERE c.SectorSubjectAreaTier2Id = {sectorSubjectAreaTier2Id}";
             var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
             var client = _cosmosDbHelper.GetClient();
-            var results = client.CreateDocumentQuery<SectorSubjectAreaTier2>(uri, sql, options).FirstOrDefault();
+            var results = client.CreateDocumentQuery<SectorSubjectAreaTier2>(uri, sql, options).AsEnumerable().FirstOrDefault();
             return Task.FromResult(results);
         }
     }
