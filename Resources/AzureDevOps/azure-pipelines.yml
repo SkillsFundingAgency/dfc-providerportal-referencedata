@@ -4,7 +4,22 @@ variables:
   BuildPlatform: 'any cpu'
   BuildConfiguration: 'release'
 
+resources:
+  repositories:
+  - repository: self
+  - repository: dfc-devops
+    type: github
+    name: SkillsFundingAgency/dfc-devops
+    ref: refs/tags/v1.1.1
+    endpoint: 'GitHub (CDH)'
+
+
 steps:
+
+# ARM template
+- template: AzureDevOpsTemplates/Build/dfc-arm-build.yml@dfc-devops
+  parameters:
+    ArmTemplateRoot: Resources
 
 # restore
 - task: DotNetCoreCLI@2
