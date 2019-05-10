@@ -12,6 +12,16 @@ resources:
     name: SkillsFundingAgency/dfc-devops
     endpoint: 'GitHub (ESFA)'
 
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+
+pr:
+  branches:
+    include:
+    - master
 
 steps:
 
