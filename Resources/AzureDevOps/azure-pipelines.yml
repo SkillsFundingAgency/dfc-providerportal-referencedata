@@ -1,0 +1,47 @@
+# dotnet core build
+
+variables:
+  BuildPlatform: 'any cpu'
+  BuildConfiguration: 'release'
+
+steps:
+
+# restore
+- task: DotNetCoreCLI@2
+  displayName: dotnet restore
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+
+# build
+- task: DotNetCoreCLI@2
+  displayName: dotnet build
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    configuration: ${{ variables.buildConfiguration }}
+
+# test and publish
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: test
+    projects: '**/*.csproj'
+    configuration: ${{ variables.buildConfiguration }}
+
+# publish
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish
+  inputs:
+    command: publish
+    projects: 'src/Dfc.ProviderPortal.ReferenceData/Dfc.ProviderPortal.ReferenceData.csproj'
+    configuration: ${{ variables.buildConfiguration }}
+    arguments: '--output $(Build.ArtifactStagingDirectory)'
+    publishWebProjects: false
+    zipAfterPublish: true
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Artifact
+  inputs:
+     pathtoPublish: $(Build.ArtifactStagingDirectory)
+     artifactName: Dfc.ProviderPortal.ReferenceData
