@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dfc.ProviderPortal.ReferenceData.Interfaces;
+﻿using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
 {
@@ -42,121 +41,352 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
 
         [Route("fe-choices")]
         [HttpGet]
-        public ActionResult<IEnumerable<FeChoice>> FeChoicesGetAll()
+        [ProducesResponseType(typeof(IEnumerable<FeChoice>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<FeChoice>>> FeChoicesGetAllAsync()
         {
-            return new FeChoice[] { };
+            try
+            {
+                var result = await _feChoiceService.GetAllAsync();
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("fe-choices/{upin}")]
         [HttpGet]
-        public ActionResult<FeChoice> FeChoicesByUpin(int upin)
+        [ProducesResponseType(typeof(FeChoice), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<FeChoice>> FeChoicesByUpinAsync(int upin)
         {
-            return new FeChoice();
+            try
+            {
+                var result = await _feChoiceService.GetByUpinAsync(upin);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("prog-types")]
         [HttpGet]
-        public ActionResult<IEnumerable<ProgType>> ProgTypesGetAll()
+        [ProducesResponseType(typeof(IEnumerable<ProgType>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ProgType>>> ProgTypesGetAllAsync()
         {
-            return new ProgType[] { };
+            try
+            {
+                var result = await _progTypeService.GetAllAsync();
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("prog-types/{progTypeId}")]
         [HttpGet]
-        public ActionResult<ProgType> ProgTypesByProgTypeId(int progTypeId)
+        [ProducesResponseType(typeof(ProgType), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ProgType>> ProgTypesByProgTypeIdAsync(int progTypeId)
         {
-            return new ProgType();
+            try
+            {
+                var result = await _progTypeService.GetByProgTypeIdAsync(progTypeId);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("sector-subject-area-tier-1s")]
         [HttpGet]
-        public ActionResult<IEnumerable<SectorSubjectAreaTier1>> SectorSubjectAreaTier1sGetAll()
+        [ProducesResponseType(typeof(IEnumerable<SectorSubjectAreaTier1>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<SectorSubjectAreaTier1>>> SectorSubjectAreaTier1sGetAllAsync()
         {
-            return new SectorSubjectAreaTier1[] { };
+            try
+            {
+                var result = await _sectorSubjectAreaTier1Service.GetAllAsync();
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("sector-subject-area-tier-1s/{sectorSubjectAreaTier1Id}")]
         [HttpGet]
-        public ActionResult<SectorSubjectAreaTier1> SectorSubjectAreaTier1sBySectorSubjectAreaTier1Id(decimal sectorSubjectAreaTier1Id)
+        [ProducesResponseType(typeof(SectorSubjectAreaTier1), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<SectorSubjectAreaTier1>> SectorSubjectAreaTier1sBySectorSubjectAreaTier1IdAsync(decimal sectorSubjectAreaTier1Id)
         {
-            return new SectorSubjectAreaTier1();
+            try
+            {
+                var result = await _sectorSubjectAreaTier1Service.GetBySectorSubjectAreaTier1IdAsync(sectorSubjectAreaTier1Id);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("sector-subject-area-tier-2s")]
         [HttpGet]
-        public ActionResult<IEnumerable<SectorSubjectAreaTier2>> SectorSubjectAreaTier2sGetAll()
+        [ProducesResponseType(typeof(IEnumerable<SectorSubjectAreaTier2>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<SectorSubjectAreaTier2>>> SectorSubjectAreaTier2sGetAllAsync()
         {
-            return new SectorSubjectAreaTier2[] { };
+            try
+            {
+                var result = await _sectorSubjectAreaTier2Service.GetAllAsync();
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("sector-subject-area-tier-2s/{sectorSubjectAreaTier2Id}")]
         [HttpGet]
-        public ActionResult<SectorSubjectAreaTier2> SectorSubjectAreaTier2sBySectorSubjectAreaTier2Id(decimal sectorSubjectAreaTier2Id)
+        [ProducesResponseType(typeof(SectorSubjectAreaTier2), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<SectorSubjectAreaTier2>> SectorSubjectAreaTier2sBySectorSubjectAreaTier2IdAsync(decimal sectorSubjectAreaTier2Id)
         {
-            return new SectorSubjectAreaTier2();
+            try
+            {
+                var result = await _sectorSubjectAreaTier2Service.GetBySectorSubjectAreaTier2IdAsync(sectorSubjectAreaTier2Id);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("standard-sector-codes")]
         [HttpGet]
-        public ActionResult<IEnumerable<StandardSectorCode>> StandardSectorCodesGetAll()
+        [ProducesResponseType(typeof(IEnumerable<StandardSectorCode>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<StandardSectorCode>>> StandardSectorCodesGetAllAsync()
         {
-            return new StandardSectorCode[] { };
+            try
+            {
+                var result = await _standardSectorCodeService.GetAllAsync();
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("standard-sector-codes/{standardSectorCodeId}")]
         [HttpGet]
-        public ActionResult<StandardSectorCode> StandardSectorCodesByStandardSectorCodeId(int standardSectorCodeId)
+        [ProducesResponseType(typeof(StandardSectorCode), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<StandardSectorCode>> StandardSectorCodesByStandardSectorCodeIdAsync(int standardSectorCodeId)
         {
-            return new StandardSectorCode();
+            try
+            {
+                var result = await _standardSectorCodeService.GetByStandardSectorCodeIdAsync(standardSectorCodeId);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("apprenticeship-frameworks")]
         [HttpGet]
-        public ActionResult<IEnumerable<ApprenticeshipFramework>> ApprenticeshipsFrameworksGetAll()
+        [ProducesResponseType(typeof(IEnumerable<ApprenticeshipFramework>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksGetAllAsync()
         {
-            return new ApprenticeshipFramework[] { };
+            try
+            {
+                var result = await _apprenticeshipFrameworkService.GetAllAsync();
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("apprenticeship-frameworks/{frameworkCode}")]
         [HttpGet]
-        public ActionResult<IEnumerable<ApprenticeshipFramework>> ApprenticeshipsFrameworksByFrameworkCode(int frameworkCode)
+        [ProducesResponseType(typeof(IEnumerable<ApprenticeshipFramework>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksByFrameworkCodeAsync(int frameworkCode)
         {
-            return new ApprenticeshipFramework[] { };
+            try
+            {
+                var result = await _apprenticeshipFrameworkService.GetApprenticeshipFrameworkByFrameworkCodeAsync(frameworkCode);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        [Route("aapprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}")]
+        [Route("apprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}")]
         [HttpGet]
-        public ActionResult<IEnumerable<ApprenticeshipFramework>> ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeId(int frameworkCode, int progTypeId)
+        [ProducesResponseType(typeof(IEnumerable<ApprenticeshipFramework>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAsync(int frameworkCode, int progTypeId)
         {
-            return new ApprenticeshipFramework[] { };
+            try
+            {
+                var result = await _apprenticeshipFrameworkService.GetApprenticeshipFrameworkByFrameworkCodeAndProgTypeIdAsync(frameworkCode, progTypeId);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        [Route("aapprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}/pathway-code/{pathwayCode}")]
+        [Route("apprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}/pathway-code/{pathwayCode}")]
         [HttpGet]
-        public ActionResult<ApprenticeshipFramework> ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAndPathwayCode(int frameworkCode, int progTypeId, int pathwayCode)
+        [ProducesResponseType(typeof(ApprenticeshipFramework), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ApprenticeshipFramework>> ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAndPathwayCodeAsync(int frameworkCode, int progTypeId, int pathwayCode)
         {
-            return new ApprenticeshipFramework();
+            try
+            {
+                var result = await _apprenticeshipFrameworkService.GetApprenticeshipFrameworkByFrameworkCodeAndProgTypeIdAndPathwayCodeAsync(frameworkCode, progTypeId, pathwayCode);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("apprenticeship-standards")]
         [HttpGet]
-        public ActionResult<IEnumerable<ApprenticeshipStandard>> ApprenticeshipsStandardsGetAll()
+        [ProducesResponseType(typeof(IEnumerable<ApprenticeshipStandard>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ApprenticeshipStandard>>> ApprenticeshipsStandardsGetAllAsync()
         {
-            return new ApprenticeshipStandard[] { };
+            try
+            {
+                var result = await _apprenticeshipStandardService.GetAllAsync();
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("apprenticeship-standards/{standardCode}")]
         [HttpGet]
-        public ActionResult<IEnumerable<ApprenticeshipStandard>> ApprenticeshipsStandardsByStandardCode(int standardCode)
+        [ProducesResponseType(typeof(IEnumerable<ApprenticeshipStandard>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ApprenticeshipStandard>>> ApprenticeshipsStandardsByStandardCodeAsync(int standardCode)
         {
-            return new ApprenticeshipStandard[] { };
+            try
+            {
+                var result = await _apprenticeshipStandardService.GetApprenticeshipStandardByStandardCodeAsync(standardCode);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [Route("apprenticeship-standards/{standardCode}/version/{version}")]
         [HttpGet]
-        public ActionResult<ApprenticeshipStandard> ApprenticeshipStandardByStandardCodeAndVersion(int standardCode, int version)
+        [ProducesResponseType(typeof(ApprenticeshipStandard), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ApprenticeshipStandard>> ApprenticeshipStandardByStandardCodeAndVersionAsync(int standardCode, int version)
         {
-            return new ApprenticeshipStandard();
+            try
+            {
+                var result = await _apprenticeshipStandardService.GetApprenticeshipStandardByStandardCodeAndVersionAsync(standardCode, version);
+                if (result == null) return new NotFoundResult();
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

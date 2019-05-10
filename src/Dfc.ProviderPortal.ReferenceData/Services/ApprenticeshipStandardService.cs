@@ -48,7 +48,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
             var sql = $"SELECT * FROM c WHERE c.StandardCode = {standardCode} AND c.Version = {version}";
             var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
             var client = _cosmosDbHelper.GetClient();
-            var results = client.CreateDocumentQuery<ApprenticeshipStandard>(uri, sql, options).FirstOrDefault();
+            var results = client.CreateDocumentQuery<ApprenticeshipStandard>(uri, sql, options).AsEnumerable().FirstOrDefault();
             return Task.FromResult(results);
         }
 

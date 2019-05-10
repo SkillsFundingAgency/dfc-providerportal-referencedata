@@ -58,7 +58,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
             var sql = $"SELECT * FROM c WHERE c.FrameworkCode = {frameworkCode} AND c.ProgType = {progTypeId} AND c.PathwayCode = {pathwayCode}";
             var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
             var client = _cosmosDbHelper.GetClient();
-            var results = client.CreateDocumentQuery<ApprenticeshipFramework>(uri, sql, options).FirstOrDefault();
+            var results = client.CreateDocumentQuery<ApprenticeshipFramework>(uri, sql, options).AsEnumerable().FirstOrDefault();
             return Task.FromResult(results);
         }
 
