@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
@@ -44,7 +45,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<FeChoice>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<FeChoice>>> FeChoicesGetAllAsync()
+        public async Task<ActionResult<IEnumerable<FeChoice>>> FeChoicesGetAllAsync([Required]string code)
         {
             try
             {
@@ -65,7 +66,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<FeChoice>> FeChoicesByUpinAsync(int upin)
+        public async Task<ActionResult<FeChoice>> FeChoicesByUpinAsync(int upin, [Required]string code)
         {
             try
             {
@@ -85,7 +86,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<ProgType>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<ProgType>>> ProgTypesGetAllAsync()
+        public async Task<ActionResult<IEnumerable<ProgType>>> ProgTypesGetAllAsync([Required]string code)
         {
             try
             {
@@ -106,7 +107,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ProgType>> ProgTypesByProgTypeIdAsync(int progTypeId)
+        public async Task<ActionResult<ProgType>> ProgTypesByProgTypeIdAsync(int progTypeId, [Required]string code)
         {
             try
             {
@@ -126,7 +127,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<SectorSubjectAreaTier1>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<SectorSubjectAreaTier1>>> SectorSubjectAreaTier1sGetAllAsync()
+        public async Task<ActionResult<IEnumerable<SectorSubjectAreaTier1>>> SectorSubjectAreaTier1sGetAllAsync([Required]string code)
         {
             try
             {
@@ -147,7 +148,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<SectorSubjectAreaTier1>> SectorSubjectAreaTier1sBySectorSubjectAreaTier1IdAsync(decimal sectorSubjectAreaTier1Id)
+        public async Task<ActionResult<SectorSubjectAreaTier1>> SectorSubjectAreaTier1sBySectorSubjectAreaTier1IdAsync(decimal sectorSubjectAreaTier1Id, [Required]string code)
         {
             try
             {
@@ -167,7 +168,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<SectorSubjectAreaTier2>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<SectorSubjectAreaTier2>>> SectorSubjectAreaTier2sGetAllAsync()
+        public async Task<ActionResult<IEnumerable<SectorSubjectAreaTier2>>> SectorSubjectAreaTier2sGetAllAsync([Required]string code)
         {
             try
             {
@@ -188,7 +189,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<SectorSubjectAreaTier2>> SectorSubjectAreaTier2sBySectorSubjectAreaTier2IdAsync(decimal sectorSubjectAreaTier2Id)
+        public async Task<ActionResult<SectorSubjectAreaTier2>> SectorSubjectAreaTier2sBySectorSubjectAreaTier2IdAsync(decimal sectorSubjectAreaTier2Id, [Required]string code)
         {
             try
             {
@@ -208,7 +209,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<StandardSectorCode>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<StandardSectorCode>>> StandardSectorCodesGetAllAsync()
+        public async Task<ActionResult<IEnumerable<StandardSectorCode>>> StandardSectorCodesGetAllAsync([Required]string code)
         {
             try
             {
@@ -229,7 +230,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<StandardSectorCode>> StandardSectorCodesByStandardSectorCodeIdAsync(int standardSectorCodeId)
+        public async Task<ActionResult<StandardSectorCode>> StandardSectorCodesByStandardSectorCodeIdAsync(int standardSectorCodeId, [Required]string code)
         {
             try
             {
@@ -249,7 +250,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<ApprenticeshipFramework>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksGetAllAsync()
+        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksGetAllAsync([Required]string code)
         {
             try
             {
@@ -270,7 +271,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksByFrameworkCodeAsync(int frameworkCode)
+        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksByFrameworkCodeAsync(int frameworkCode, [Required]string code)
         {
             try
             {
@@ -291,7 +292,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAsync(int frameworkCode, int progTypeId)
+        public async Task<ActionResult<IEnumerable<ApprenticeshipFramework>>> ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAsync(int frameworkCode, int progTypeId, [Required]string code)
         {
             try
             {
@@ -312,7 +313,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ApprenticeshipFramework>> ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAndPathwayCodeAsync(int frameworkCode, int progTypeId, int pathwayCode)
+        public async Task<ActionResult<ApprenticeshipFramework>> ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAndPathwayCodeAsync(int frameworkCode, int progTypeId, int pathwayCode, [Required]string code)
         {
             try
             {
@@ -332,7 +333,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<ApprenticeshipStandard>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<ApprenticeshipStandard>>> ApprenticeshipsStandardsGetAllAsync()
+        public async Task<ActionResult<IEnumerable<ApprenticeshipStandard>>> ApprenticeshipsStandardsGetAllAsync([Required]string code)
         {
             try
             {
@@ -353,7 +354,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<ApprenticeshipStandard>>> ApprenticeshipsStandardsByStandardCodeAsync(int standardCode)
+        public async Task<ActionResult<IEnumerable<ApprenticeshipStandard>>> ApprenticeshipsStandardsByStandardCodeAsync(int standardCode, [Required]string code)
         {
             try
             {
@@ -374,7 +375,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ApprenticeshipStandard>> ApprenticeshipStandardByStandardCodeAndVersionAsync(int standardCode, int version)
+        public async Task<ActionResult<ApprenticeshipStandard>> ApprenticeshipStandardByStandardCodeAndVersionAsync(int standardCode, int version, [Required]string code)
         {
             try
             {
