@@ -3,46 +3,46 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "functionAppPrefix": {
-      "value": "__functionAppPrefix__"
+      "value": "dfc-foo-prov-ref"
     },
     "appServicePlanName": {
-      "value": "__providerPortalAppServicePlan__"
+      "value": "dfc-dev-prov-asp"
     },
     "appServicePlanResourceGroup": {
-      "value": "__providerPortalResourceGroup__"
+      "value": "dfc-dev-prov-rg"
     },
     "storageConnectionString": {
-      "value": "__providerPortalStorageConnectionStr__"
+      "value": "DefaultEndpointsProtocol=https;AccountName=dfcfooprovstr;AccountKey=this_is_not_a_real_account==;EndpointSuffix=core.windows.net"
     },
     "cosmosDbFqdn": {
-      "value": "__providerPortalCosmosDbFqdn__"
+      "value": "https://dfc-foo-prov-cdb.documents.azure.com/"
     },
     "cosmosDbKey": {
-      "value": "__providerPortalCosmosDBPrimaryKey__"
+      "value": "not-a-real-key"
     },
     "cosmosDbDatabase": {
-      "value": "__providerPortalCosmosDbAccDatabaseName__"
+      "value": "mydb"
     },
     "cosmosDbCollectionFeChoices": {
-      "value": "__cosmosDbCollectionFeChoices__"
+      "value": "fechoices"
     },
     "cosmosDbCollectionFrameworks": {
-      "value": "__cosmosDbCollectionFrameworks__"
+      "value": "frameworks"
     },
     "cosmosDbCollectionProgTypes": {
-      "value": "__cosmosDbCollectionProgTypes__"
+      "value": "progtypes"
     },
     "cosmosDbCollectionSsaTier1s": {
-      "value": "__cosmosDbCollectionSsaTier1s__"
+      "value": "sectorsubjectareatier1s"
     },
     "cosmosDbCollectionSsaTier2s": {
-      "value": "__cosmosDbCollectionSsaTier2s__"
+      "value": "sectorsubjectareatier2s"
     },
     "cosmosDbCollectionStandards": {
-      "value": "__cosmosDbCollectionStandards__"
+      "value": "standards"
     },
     "cosmosDbCollectionStandardsSectorCodes": {
-      "value": "__cosmosDbCollectionStandardsSectorCodes__"
+      "value": "standardsectorcodes"
     }
   }
 }
