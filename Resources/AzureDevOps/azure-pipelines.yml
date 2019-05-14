@@ -11,7 +11,7 @@ resources:
     type: github
     name: SkillsFundingAgency/dfc-devops
     endpoint: 'GitHub (ESFA)'
-    ref: refs/tags/v1.2.0
+    ref: refs/tags/v1.2.1
 
 trigger:
   batch: true

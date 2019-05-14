@@ -25,6 +25,66 @@
       "metadata": {
         "description": "Connection string for the storage account to store function app files"
       }
+    },
+    "cosmosDBfqdn": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB account name in the format https://dfc-xxx-xxx-cdb.documents.azure.com/ for app settings"
+      }
+    },
+    "cosmosDBkey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Cosmos DB access key for app settings"
+      }
+    },
+    "cosmosDBdatabase": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB database name for app settings"
+      }
+    },
+    "cosmosDbCollectionFeChoices": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB collection name for app settings"
+      }
+    },
+    "cosmosDbCollectionFrameworks": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB collection name for app settings"
+      }
+    },
+    "cosmosDbCollectionProgTypes": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB collection name for app settings"
+      }
+    },
+    "cosmosDbCollectionSsaTier1s": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB collection name for app settings"
+      }
+    },
+    "cosmosDbCollectionSsaTier2s": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB collection name for app settings"
+      }
+    },
+    "cosmosDbCollectionStandards": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB collection name for app settings"
+      }
+    },
+    "cosmosDbCollectionStandardsSectorCodes": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB collection name for app settings"
+      }
     }
   },
   "variables": {
@@ -91,6 +151,46 @@
               {
                 "name": "AzureWebJobsStorage",
                 "value": "[parameters('storageConnectionString')]"
+              },
+              {
+                "name": "CosmosDbSettings__EndpointUri",
+                "value": "[parameters('cosmosDBfqdn')]"
+              },
+              {
+                "name": "CosmosDbSettings__PrimaryKey",
+                "value": "[parameters('cosmosDBkey')]"
+              },
+              {
+                "name": "CosmosDbSettings__DatabaseId",
+                "value": "[parameters('cosmosDBdatabase')]"
+              },
+              {
+                "name": "CosmosDbCollectionSettings__FeChoicesCollectionId",
+                "value": "[parameters('cosmosDbCollectionFeChoices')]"
+              },
+              {
+                "name": "CosmosDbCollectionSettings__FrameworksCollectionId",
+                "value": "[parameters('cosmosDbCollectionFrameworks')]"
+              },
+              {
+                "name": "CosmosDbCollectionSettings__ProgTypesCollectionId",
+                "value": "[parameters('cosmosDbCollectionProgTypes')]"
+              },
+              {
+                "name": "CosmosDbCollectionSettings__SectorSubjectAreaTier1sCollectionId",
+                "value": "[parameters('cosmosDbCollectionSsaTier1s')]"
+              },
+              {
+                "name": "CosmosDbCollectionSettings__SectorSubjectAreaTier2sCollectionId",
+                "value": "[parameters('cosmosDbCollectionSsaTier2s')]"
+              },
+              {
+                "name": "CosmosDbCollectionSettings__StandardsCollectionId",
+                "value": "[parameters('cosmosDbCollectionStandards')]"
+              },
+              {
+                "name": "CosmosDbCollectionSettings__StandardSectorCodesCollectionId",
+                "value": "[parameters('cosmosDbCollectionStandardsSectorCodes')]"
               }
             ]
           },
