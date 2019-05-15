@@ -21,15 +21,25 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
         public StandardSectorCodeService(
             ICosmosDbHelper cosmosDbHelper,
             IOptions<CosmosDbSettings> cosmosDbSettings,
-            IOptions<CosmosDbCollectionSettings> cosmosDbCollectionSettings)
+            IOptions<CosmosDbCollectionSettings> cosmosDbCollectionSettings) : this(cosmosDbHelper, cosmosDbSettings.Value, cosmosDbCollectionSettings.Value)
+        {
+            Throw.IfNull(cosmosDbHelper, nameof(cosmosDbHelper));
+            Throw.IfNull(cosmosDbSettings, nameof(cosmosDbSettings));
+            Throw.IfNull(cosmosDbCollectionSettings, nameof(cosmosDbCollectionSettings));
+        }
+
+        public StandardSectorCodeService(
+            ICosmosDbHelper cosmosDbHelper,
+            CosmosDbSettings cosmosDbSettings,
+            CosmosDbCollectionSettings cosmosDbCollectionSettings)
         {
             Throw.IfNull(cosmosDbHelper, nameof(cosmosDbHelper));
             Throw.IfNull(cosmosDbSettings, nameof(cosmosDbSettings));
             Throw.IfNull(cosmosDbCollectionSettings, nameof(cosmosDbCollectionSettings));
 
             _cosmosDbHelper = cosmosDbHelper;
-            _cosmosDbSettings = cosmosDbSettings.Value;
-            _cosmosDbCollectionSettings = cosmosDbCollectionSettings.Value;
+            _cosmosDbSettings = cosmosDbSettings;
+            _cosmosDbCollectionSettings = cosmosDbCollectionSettings;
         }
 
         public Task<IEnumerable<StandardSectorCode>> GetAllAsync()
