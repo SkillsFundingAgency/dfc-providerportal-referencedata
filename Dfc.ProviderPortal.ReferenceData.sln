@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dfc.ProviderPortal.ReferenceData", "src\Dfc.ProviderPortal.ReferenceData\Dfc.ProviderPortal.ReferenceData.csproj", "{7F439A05-BE2F-455E-A22A-EA378208318F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dfc.ProviderPortal.ReferenceData.Api", "src\Dfc.ProviderPortal.ReferenceData.Api\Dfc.ProviderPortal.ReferenceData.Api.csproj", "{4B974978-1D9B-4FC0-A5C3-2299E125AED4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dfc.ProviderPortal.ReferenceData.Api", "src\Dfc.ProviderPortal.ReferenceData.Api\Dfc.ProviderPortal.ReferenceData.Api.csproj", "{4B974978-1D9B-4FC0-A5C3-2299E125AED4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
