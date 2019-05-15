@@ -26,6 +26,31 @@
         "description": "Connection string for the storage account to store function app files"
       }
     },
+    "ApimServiceName": {
+      "type": "string",
+      "metadata": {
+        "description": "APIM name"
+      }
+    },
+    "ApimResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource group where the APIM is located"
+      }
+    },
+    "ApiName": {
+      "type": "string",
+      "metadata": {
+        "description": "API name"
+      }
+    },
+    "apiSuffix": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Suffix uniquely identifying this API and all of its resource paths within APIM, defaults to apiName"
+      }
+    },
     "cosmosDBfqdn": {
       "type": "string",
       "metadata": {
@@ -94,7 +119,7 @@
   },
   "resources": [{
       "apiVersion": "2017-05-10",
-      "name": "ppukrlpAppInsights",
+      "name": "pprefdataAppInsights",
       "type": "Microsoft.Resources/deployments",
       "properties": {
         "mode": "Incremental",
@@ -114,10 +139,10 @@
     },
     {
       "apiVersion": "2017-05-10",
-      "name": "ppukrlpAppService",
+      "name": "pprefdataAppService",
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [
-        "ppukrlpAppInsights"
+        "pprefdataAppInsights"
       ],
       "properties": {
         "mode": "Incremental",
@@ -142,7 +167,7 @@
             "value": [
               {
                 "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                "value": "[reference('ppukrlpAppInsights').outputs.InstrumentationKey.value]"
+                "value": "[reference('pprefdataAppInsights').outputs.InstrumentationKey.value]"
               },
               {
                 "name": "FUNCTIONS_EXTENSION_VERSION",
@@ -199,6 +224,60 @@
           }
         }
       }
+    },
+    {
+      "name": "pprefdataApimProduct",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "resourceGroup": "[parameters('ApimResourceGroup')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'APIM/apim-product.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "allowAnonymousAccess": {
+            "value": true
+          },
+          "apimServiceName": {
+            "value": "[parameters('ApimServiceName')]"
+          },
+          "productDisplayName": {
+            "value": "Reference Data"
+          }
+        }
+      }
+    },
+    {
+      "name": "pprefdataApimApi",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "resourceGroup": "[parameters('ApimResourceGroup')]",
+      "dependsOn": [
+        "pprefdataApimProduct"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'APIM/apim-api.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apimProductInstanceName": {
+            "value": "[reference('pprefdataApimProduct').outputs.ApimProductInstanceName.value]"
+          },
+          "apimServiceName": {
+            "value": "[parameters('ApimServiceName')]"
+          },
+          "apiName": {
+            "value": "[parameters('apiName')]"
+          },
+          "apiSuffix": {
+            "value": "[parameters('apiSuffix')]"
+          }
+        }
+      }
     }
   ],
   "outputs": {
@@ -212,7 +291,7 @@
     },
     "appInsightInstrumentationKey": {
       "type": "string",
-      "value": "[reference('ppukrlpAppInsights').outputs.InstrumentationKey.value]"
+      "value": "[reference('pprefdataAppInsights').outputs.InstrumentationKey.value]"
     }
   }
 }
