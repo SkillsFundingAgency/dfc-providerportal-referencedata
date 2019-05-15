@@ -4,6 +4,7 @@
     <!--<TargetFramework>netcoreapp2.1</TargetFramework>-->
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
   </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Dfc.ProviderPortal.Packages" Version="0.1.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.0-beta3" />

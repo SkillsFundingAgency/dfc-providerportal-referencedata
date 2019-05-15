@@ -15,11 +15,16 @@ namespace Dfc.ProviderPortal.ReferenceData.Helpers
     {
         private readonly ICosmosDbSettings _settings;
 
-        public CosmosDbHelper(IOptions<CosmosDbSettings> settings)
+        public CosmosDbHelper(IOptions<CosmosDbSettings> settings) : this(settings.Value)
+        {
+            Throw.IfNull(settings, nameof(settings));
+        }
+
+        public CosmosDbHelper(CosmosDbSettings settings)
         {
             Throw.IfNull(settings, nameof(settings));
 
-            _settings = settings.Value;
+            _settings = settings;
         }
 
         public async Task<Database> CreateDatabaseIfNotExistsAsync(DocumentClient client)
