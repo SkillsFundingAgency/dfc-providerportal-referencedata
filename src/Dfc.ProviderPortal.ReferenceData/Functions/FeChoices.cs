@@ -1,13 +1,9 @@
 using Dfc.ProviderPortal.Packages.AzureFunctions.DependencyInjection;
-using Dfc.ProviderPortal.ReferenceData.Helpers;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
-using Dfc.ProviderPortal.ReferenceData.Services;
-using Dfc.ProviderPortal.ReferenceData.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -26,18 +22,6 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
         {
             try
             {
-                //var configuration = new ConfigurationBuilder()
-                //    .SetBasePath(Environment.CurrentDirectory)
-                //    .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
-                //    .AddEnvironmentVariables()
-                //    .Build();
-
-                //var cosmosDbSettings = new CosmosDbSettings();
-                //var cosmosDbCollectionSettings = new CosmosDbCollectionSettings();
-                //configuration.Bind(nameof(CosmosDbSettings), cosmosDbSettings);
-                //configuration.Bind(nameof(CosmosDbCollectionSettings), cosmosDbCollectionSettings);
-
-                //var feChoiceService = new FeChoiceService(new CosmosDbHelper(cosmosDbSettings), cosmosDbSettings, cosmosDbCollectionSettings);
                 var results = await feChoiceService.GetAllAsync();
 
                 if (results == null) new NotFoundResult();
