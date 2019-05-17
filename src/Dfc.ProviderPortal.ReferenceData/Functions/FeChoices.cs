@@ -1,4 +1,6 @@
+using Dfc.ProviderPortal.Packages.AzureFunctions.DependencyInjection;
 using Dfc.ProviderPortal.ReferenceData.Helpers;
+using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Services;
 using Dfc.ProviderPortal.ReferenceData.Settings;
 using Microsoft.AspNetCore.Http;
@@ -19,22 +21,23 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
         [FunctionName("FeChoices")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "referencedata/fe-choices")] HttpRequest req,
-            ILogger log)
+            ILogger log,
+            [Inject] IFeChoiceService feChoiceService)
         {
             try
             {
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Environment.CurrentDirectory)
-                    .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
-                    .AddEnvironmentVariables()
-                    .Build();
+                //var configuration = new ConfigurationBuilder()
+                //    .SetBasePath(Environment.CurrentDirectory)
+                //    .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
+                //    .AddEnvironmentVariables()
+                //    .Build();
 
-                var cosmosDbSettings = new CosmosDbSettings();
-                var cosmosDbCollectionSettings = new CosmosDbCollectionSettings();
-                configuration.Bind(nameof(CosmosDbSettings), cosmosDbSettings);
-                configuration.Bind(nameof(CosmosDbCollectionSettings), cosmosDbCollectionSettings);
+                //var cosmosDbSettings = new CosmosDbSettings();
+                //var cosmosDbCollectionSettings = new CosmosDbCollectionSettings();
+                //configuration.Bind(nameof(CosmosDbSettings), cosmosDbSettings);
+                //configuration.Bind(nameof(CosmosDbCollectionSettings), cosmosDbCollectionSettings);
 
-                var feChoiceService = new FeChoiceService(new CosmosDbHelper(cosmosDbSettings), cosmosDbSettings, cosmosDbCollectionSettings);
+                //var feChoiceService = new FeChoiceService(new CosmosDbHelper(cosmosDbSettings), cosmosDbSettings, cosmosDbCollectionSettings);
                 var results = await feChoiceService.GetAllAsync();
 
                 if (results == null) new NotFoundResult();
