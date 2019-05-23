@@ -18,11 +18,6 @@ namespace Dfc.ProviderPortal.ReferenceData
     {
         public void Configure(IWebJobsBuilder builder)
         {
-            //WebHost.CreateDefaultBuilder()
-            //    .UseStartup<Startup>()
-            //    .Build()
-            //    .StartAsync();
-
             builder.AddDependencyInjection();
 
             var configuration = new ConfigurationBuilder()
