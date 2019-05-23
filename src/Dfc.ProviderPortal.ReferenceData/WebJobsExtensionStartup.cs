@@ -18,21 +18,16 @@ namespace Dfc.ProviderPortal.ReferenceData
     {
         public void Configure(IWebJobsBuilder builder)
         {
-            //WebHost.CreateDefaultBuilder()
-            //    .UseStartup<Startup>()
-            //    .Build()
-            //    .StartAsync();
-
             builder.AddDependencyInjection();
 
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Environment.CurrentDirectory)
                 .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
-                .AddApplicationInsightsSettings()
+                //.AddApplicationInsightsSettings()
                 .Build();
 
-            builder.Services.AddApplicationInsightsTelemetry(configuration);
+            //builder.Services.AddApplicationInsightsTelemetry(configuration);
 
             builder.Services.AddSingleton<IConfiguration>(configuration);
             builder.Services.Configure<CosmosDbSettings>(configuration.GetSection(nameof(CosmosDbSettings)));
