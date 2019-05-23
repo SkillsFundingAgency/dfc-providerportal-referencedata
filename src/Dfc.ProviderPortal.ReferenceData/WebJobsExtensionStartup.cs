@@ -4,8 +4,6 @@ using Dfc.ProviderPortal.ReferenceData.Helpers;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Services;
 using Dfc.ProviderPortal.ReferenceData.Settings;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.Configuration;
