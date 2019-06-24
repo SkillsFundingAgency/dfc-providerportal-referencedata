@@ -35,7 +35,8 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
             using (var writer = new StringWriter(new StringBuilder()))
             {
                 var jsonWriter = new OpenApiJsonWriter(writer);
-                swagger.SerializeAsV3(jsonWriter);
+                //swagger.SerializeAsV3(jsonWriter);
+                swagger.SerializeAsV2(jsonWriter);
                 var obj = JObject.Parse(writer.ToString());
                 return new JsonResult(obj);
             }
