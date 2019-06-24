@@ -137,7 +137,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
             return Ok();
         }
 
-        [Route("apprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}")]
+        [Route("apprenticeship-frameworks/{frameworkCode}/prog-type/{progTypeId}")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ApprenticeshipFramework>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -148,7 +148,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
             return Ok();
         }
 
-        [Route("apprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}/pathway-code/{pathwayCode}")]
+        [Route("apprenticeship-frameworks/{frameworkCode}/prog-type/{progTypeId}/pathway-code/{pathwayCode}")]
         [HttpGet]
         [ProducesResponseType(typeof(ApprenticeshipFramework), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
