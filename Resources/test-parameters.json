@@ -23,6 +23,9 @@
     "ApiName": {
       "value": "myapi"
     },
+    "apiProductDisplayName": {
+      "value": "Find a course"
+    },
     "cosmosDbFqdn": {
       "value": "https://dfc-foo-prov-cdb.documents.azure.com/"
     },
