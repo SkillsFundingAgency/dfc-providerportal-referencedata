@@ -23,6 +23,9 @@
     "ApiName": {
       "value": "__apiName__"
     },
+    "apiProductDisplayName": {
+      "value": "__apiProductDisplayName__"
+    },
     "apiSuffix": {
       "value": "__apiSuffix__"
     },
