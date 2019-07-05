@@ -16,7 +16,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
     {
         [FunctionName("ApprenticeshipsStandards")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "referencedata/apprenticeship-standards")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/apprenticeship-standards")] HttpRequest req,
             ILogger log,
             [Inject] IApprenticeshipStandardService apprenticeshipStandardService)
         {

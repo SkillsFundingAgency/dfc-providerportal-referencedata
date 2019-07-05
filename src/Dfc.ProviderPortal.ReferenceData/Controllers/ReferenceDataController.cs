@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Dfc.ProviderPortal.ReferenceData.Controllers
 {
@@ -27,7 +26,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult FeChoicesByUpin(int upin, [Required]string code)
+        public IActionResult FeChoicesByUpin(int upin)
         {
             return Ok();
         }
@@ -37,7 +36,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(typeof(IEnumerable<ProgType>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ProgTypesGetAllAsync([Required]string code)
+        public IActionResult ProgTypesGetAllAsync()
         {
             return Ok();
         }
@@ -48,7 +47,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ProgTypesByProgTypeIdAsync(int progTypeId, [Required]string code)
+        public IActionResult ProgTypesByProgTypeIdAsync(int progTypeId)
         {
             return Ok();
         }
@@ -58,7 +57,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(typeof(IEnumerable<SectorSubjectAreaTier1>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult SectorSubjectAreaTier1sGetAllAsync([Required]string code)
+        public IActionResult SectorSubjectAreaTier1sGetAllAsync()
         {
             return Ok();
         }
@@ -69,7 +68,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult SectorSubjectAreaTier1sBySectorSubjectAreaTier1IdAsync(decimal sectorSubjectAreaTier1Id, [Required]string code)
+        public IActionResult SectorSubjectAreaTier1sBySectorSubjectAreaTier1IdAsync(decimal sectorSubjectAreaTier1Id)
         {
             return Ok();
         }
@@ -79,7 +78,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(typeof(IEnumerable<SectorSubjectAreaTier2>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult SectorSubjectAreaTier2sGetAllAsync([Required]string code)
+        public IActionResult SectorSubjectAreaTier2sGetAllAsync()
         {
             return Ok();
         }
@@ -90,7 +89,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult SectorSubjectAreaTier2sBySectorSubjectAreaTier2IdAsync(decimal sectorSubjectAreaTier2Id, [Required]string code)
+        public IActionResult SectorSubjectAreaTier2sBySectorSubjectAreaTier2IdAsync(decimal sectorSubjectAreaTier2Id)
         {
             return Ok();
         }
@@ -100,7 +99,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(typeof(IEnumerable<StandardSectorCode>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult StandardSectorCodesGetAllAsync([Required]string code)
+        public IActionResult StandardSectorCodesGetAllAsync()
         {
             return Ok();
         }
@@ -111,7 +110,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult StandardSectorCodesByStandardSectorCodeIdAsync(int standardSectorCodeId, [Required]string code)
+        public IActionResult StandardSectorCodesByStandardSectorCodeIdAsync(int standardSectorCodeId)
         {
             return Ok();
         }
@@ -121,7 +120,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(typeof(IEnumerable<ApprenticeshipFramework>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ApprenticeshipsFrameworksGetAllAsync([Required]string code)
+        public IActionResult ApprenticeshipsFrameworksGetAllAsync()
         {
             return Ok();
         }
@@ -132,7 +131,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ApprenticeshipsFrameworksByFrameworkCodeAsync(int frameworkCode, [Required]string code)
+        public IActionResult ApprenticeshipsFrameworksByFrameworkCodeAsync(int frameworkCode)
         {
             return Ok();
         }
@@ -143,7 +142,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAsync(int frameworkCode, int progTypeId, [Required]string code)
+        public IActionResult ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAsync(int frameworkCode, int progTypeId)
         {
             return Ok();
         }
@@ -154,7 +153,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAndPathwayCodeAsync(int frameworkCode, int progTypeId, int pathwayCode, [Required]string code)
+        public IActionResult ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeIdAndPathwayCodeAsync(int frameworkCode, int progTypeId, int pathwayCode)
         {
             return Ok();
         }
@@ -164,7 +163,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(typeof(IEnumerable<ApprenticeshipStandard>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ApprenticeshipsStandardsGetAllAsync([Required]string code)
+        public IActionResult ApprenticeshipsStandardsGetAllAsync()
         {
             return Ok();
         }
@@ -175,7 +174,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ApprenticeshipsStandardsByStandardCodeAsync(int standardCode, [Required]string code)
+        public IActionResult ApprenticeshipsStandardsByStandardCodeAsync(int standardCode)
         {
             return Ok();
         }
@@ -186,7 +185,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ApprenticeshipStandardByStandardCodeAndVersionAsync(int standardCode, int version, [Required]string code)
+        public IActionResult ApprenticeshipStandardByStandardCodeAndVersionAsync(int standardCode, int version)
         {
             return Ok();
         }

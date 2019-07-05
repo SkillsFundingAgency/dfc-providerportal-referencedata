@@ -16,7 +16,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
     {
         [FunctionName("ProgTypesByProgTypeId")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "referencedata/prog-types/{progTypeId}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/prog-types/{progTypeId}")] HttpRequest req,
             ILogger log,
             [Inject] IProgTypeService progTypeService,
             int progTypeId)
