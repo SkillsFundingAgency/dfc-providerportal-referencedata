@@ -16,7 +16,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
     {
         [FunctionName("FeChoices")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "referencedata/fe-choices")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/fe-choices")] HttpRequest req,
             ILogger log,
             [Inject] IFeChoiceService feChoiceService)
         {

@@ -3,6 +3,8 @@
     <!--<TargetFramework>netstandard2.0</TargetFramework>-->
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
+    <AssemblyVersion>1.0.19186.1127</AssemblyVersion>
+    <FileVersion>1.0.19186.1127</FileVersion>
   </PropertyGroup>
   
   <ItemGroup>
