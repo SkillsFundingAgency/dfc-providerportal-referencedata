@@ -16,7 +16,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
     {
         [FunctionName("SectorSubjectAreaTier2sBySectorSubjectAreaTier2Id")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "referencedata/sector-subject-area-tier-2s/{sectorSubjectAreaTier2Id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/sector-subject-area-tier-2s/{sectorSubjectAreaTier2Id}")] HttpRequest req,
             ILogger log,
             [Inject] ISectorSubjectAreaTier2Service sectorSubjectAreaTier2Service,
             decimal sectorSubjectAreaTier2Id)

@@ -16,7 +16,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
     {
         [FunctionName("ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeId")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "referencedata/apprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/apprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}")] HttpRequest req,
             ILogger log,
             [Inject] IApprenticeshipFrameworkService apprenticeshipFrameworkService,
             int frameworkCode,

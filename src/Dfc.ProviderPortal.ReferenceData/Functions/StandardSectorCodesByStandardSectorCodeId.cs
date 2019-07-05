@@ -16,7 +16,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
     {
         [FunctionName("StandardSectorCodesByStandardSectorCodeId")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "referencedata/standard-sector-codes/{standardSectorCodeId}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/standard-sector-codes/{standardSectorCodeId}")] HttpRequest req,
             ILogger log,
             [Inject] IStandardSectorCodeService standardSectorCodeService,
             int standardSectorCodeId)
