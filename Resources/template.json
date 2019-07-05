@@ -242,7 +242,7 @@
         },
         "parameters": {
           "allowAnonymousAccess": {
-            "value": true
+            "value": false
           },
           "apimServiceName": {
             "value": "[parameters('ApimServiceName')]"
