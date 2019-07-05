@@ -16,7 +16,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
         [ProducesResponseType(typeof(IEnumerable<FeChoice>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult FeChoicesGetAll([Required]string code)
+        public IActionResult FeChoicesGetAll()
         {
             return Ok();
         }
