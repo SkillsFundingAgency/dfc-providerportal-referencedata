@@ -21,7 +21,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Functions
     {
         [FunctionName("Swagger")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "referencedata/swagger.json")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/swagger.json")] HttpRequest req,
             ILogger log)
         {
             var url = req.GetDisplayUrl();
