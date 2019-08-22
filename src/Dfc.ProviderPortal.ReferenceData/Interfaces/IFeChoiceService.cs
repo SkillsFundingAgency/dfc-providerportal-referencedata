@@ -8,6 +8,6 @@ namespace Dfc.ProviderPortal.ReferenceData.Interfaces
     {
         Task<IEnumerable<FeChoice>> GetAllAsync();
 
-        Task<FeChoice> GetByUpinAsync(int upin);
+        Task<FeChoice> GetByUKPRNAsync(int ukprn);
     }
 }

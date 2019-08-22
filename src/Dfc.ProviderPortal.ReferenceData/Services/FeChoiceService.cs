@@ -50,10 +50,10 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
             return Task.FromResult(results);
         }
 
-        public Task<FeChoice> GetByUpinAsync(int upin)
+        public Task<FeChoice> GetByUKPRNAsync(int ukprn)
         {
             var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.FeChoicesCollectionId);
-            var sql = $"SELECT * FROM c WHERE c.UPIN = {upin}";
+            var sql = $"SELECT * FROM c WHERE c.UKPRN = {ukprn}";
             var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
             var client = _cosmosDbHelper.GetClient();
             var results = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsEnumerable().FirstOrDefault();
