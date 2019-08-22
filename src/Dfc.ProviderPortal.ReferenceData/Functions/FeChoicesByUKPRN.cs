@@ -12,18 +12,18 @@ using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Functions
 {
-    public static class FeChoicesByUpin
+    public static class FeChoicesByUKPRN
     {
-        [FunctionName("FeChoicesByUpin")]
+        [FunctionName("FeChoicesByUKPRN")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/fe-choices/{upin}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/fe-choices/{ukprn}")] HttpRequest req,
             ILogger log,
             [Inject] IFeChoiceService feChoiceService,
-            int upin)
+            int ukprn)
         {
             try
             {
-                var results = await feChoiceService.GetByUpinAsync(upin);
+                var results = await feChoiceService.GetByUKPRNAsync(ukprn);
 
                 if (results == null) new NotFoundResult();
 

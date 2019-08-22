@@ -20,13 +20,13 @@ namespace Dfc.ProviderPortal.ReferenceData.Controllers
             return Ok();
         }
 
-        [Route("fe-choices/{upin}")]
+        [Route("fe-choices/{ukprn}")]
         [HttpGet]
         [ProducesResponseType(typeof(FeChoice), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult FeChoicesByUpin(int upin)
+        public IActionResult FeChoicesByUKPRN(int UKPRN)
         {
             return Ok();
         }
