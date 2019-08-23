@@ -60,10 +60,10 @@
       "value": "__cosmosDbCollectionStandardsSectorCodes__"
     },
     "referenceDataServiceApiUrl": {
-      "value": "https://apim-instance/referencedata/api/"
+      "value": "__referenceDataApiUrl__"
     },
     "referenceDataServiceApiKey": {
-      "value": "not-a-real-api-key"
+      "value": "__apimKey__"
     }
   }
 }

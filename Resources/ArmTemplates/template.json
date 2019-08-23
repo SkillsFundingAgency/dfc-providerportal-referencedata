@@ -123,7 +123,7 @@
     "referenceDataServiceApiKey": {
       "type": "securestring",
       "metadata": {
-        "description": "Reference Daata API service key"
+        "description": "Reference Data API service key"
       }
     }
   },
