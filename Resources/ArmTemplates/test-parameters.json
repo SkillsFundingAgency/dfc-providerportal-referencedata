@@ -55,6 +55,12 @@
     },
     "cosmosDbCollectionStandardsSectorCodes": {
       "value": "standardsectorcodes"
+    },
+    "referenceDataServiceApiUrl": {
+      "value": "https://apim-instance/referencedata/api/"
+    },
+    "referenceDataServiceApiKey": {
+      "value": "not-a-real-api-key"
     }
   }
 }

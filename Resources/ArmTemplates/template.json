@@ -113,6 +113,18 @@
       "metadata": {
         "description": "Cosmos DB collection name for app settings"
       }
+    },
+    "referenceDataServiceApiUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Reference Data API service url"
+      }
+    },
+    "referenceDataServiceApiKey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Reference Data API service key"
+      }
     }
   },
   "variables": {
@@ -220,6 +232,14 @@
               {
                 "name": "CosmosDbCollectionSettings__StandardSectorCodesCollectionId",
                 "value": "[parameters('cosmosDbCollectionStandardsSectorCodes')]"
+              },
+              {
+                "name": "ReferenceDataServiceSettings__ApiUrl",
+                "value" : "[parameters('referenceDataServiceApiUrl')]"
+              },
+              {
+                "name": "ReferenceDataServiceSettings__ApiKey",
+                "value": "[parameters('referenceDataServiceApiKey')]"
               }
             ]
           },
