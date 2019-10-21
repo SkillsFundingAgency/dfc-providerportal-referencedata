@@ -527,7 +527,7 @@
     },
     {
       "apiVersion": "2017-05-10",
-      "name": "cosmosCollectionStandards",
+      "name": "cosmosCollectionStandardSectorCodes",
       "type": "Microsoft.Resources/deployments",
       "resourceGroup": "[parameters('sharedResourceGroup')]",
       "properties": {
