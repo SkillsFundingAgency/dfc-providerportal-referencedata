@@ -467,7 +467,7 @@
     },
     {
       "apiVersion": "2017-05-10",
-      "name": "cosmosCollectionTier1s",
+      "name": "cosmosCollectionTier2s",
       "type": "Microsoft.Resources/deployments",
       "resourceGroup": "[parameters('sharedResourceGroup')]",
       "properties": {
