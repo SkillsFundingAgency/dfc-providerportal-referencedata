@@ -8,7 +8,7 @@
     "appServicePlanName": {
       "value": "dfc-dev-prov-asp"
     },
-    "appServicePlanResourceGroup": {
+    "sharedResourceGroup": {
       "value": "dfc-test-template-rg"
     },
     "storageConnectionString": {
@@ -61,6 +61,24 @@
     },
     "referenceDataServiceApiKey": {
       "value": "not-a-real-api-key"
+    },
+    "frameworkCollectionPartitionKey": {
+      "value": "a-partition-key"
+    },
+    "ProgTypeCollectionPartitionKey": {
+      "value": "a-partition-key"
+    },
+    "Tier1CollectionPartitionKey": {
+      "value": "a-partition-key"
+    },
+    "Tier2CollectionPartitionKey": {
+      "value": "a-partition-key"
+    },
+    "StandardsCollectionPartitionKey": {
+      "value": "a-partition-key"
+    },
+    "StandardSectorCodeCollectionPartitionKey": {
+      "value": "a-partition-key"
     }
   }
 }

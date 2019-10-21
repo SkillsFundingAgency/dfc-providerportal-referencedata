@@ -14,7 +14,7 @@
         "description": "App service plan to run the function app under"
       }
     },
-    "appServicePlanResourceGroup": {
+    "sharedResourceGroup": {
       "type": "string",
       "metadata": {
         "description": "Resource group the app service plan is in"
@@ -72,6 +72,12 @@
         "description": "Cosmos DB database name for app settings"
       }
     },
+    "cosmosDbAccount": {
+      "type": "string",
+      "metadata": {
+        "description": "Cosmos DB account name, used for creation of collections"
+      }
+    },
     "cosmosDbCollectionFeChoices": {
       "type": "string",
       "metadata": {
@@ -125,6 +131,42 @@
       "metadata": {
         "description": "Reference Data API service key"
       }
+    },
+    "frameworkCollectionPartitionKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the partition key for this environment..."
+      }
+    },
+    "ProgTypeCollectionPartitionKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the partition key for this environment."
+      }
+    },
+    "Tier1CollectionPartitionKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the partition key for this environment."
+      }
+    },
+    "Tier2CollectionPartitionKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the partition key for this environment."
+      }
+    },
+    "StandardsCollectionPartitionKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the partition key for this environment."
+      }
+    },
+    "StandardSectorCodeCollectionPartitionKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the partition key for this environment."
+      }
     }
   },
   "variables": {
@@ -174,7 +216,7 @@
             "value": "[parameters('appServicePlanName')]"
           },
           "appServicePlanResourceGroup": {
-            "value": "[parameters('appServicePlanResourceGroup')]"
+            "value": "[parameters('sharedResourceGroup')]"
           },
           "appServiceType": {
             "value": "functionapp"
@@ -302,7 +344,217 @@
           }
         }
       }
-    }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "cosmosCollectionFeChoices",
+        "type": "Microsoft.Resources/deployments",
+        "resourceGroup": "[parameters('sharedResourceGroup')]",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri": "[concat(variables('deploymentUrlBase'),'CosmosDb/cosmos-collection.json')]",
+                "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+                "accountName": {
+                    "value": "[parameters('cosmosDbAccount')]"
+                },
+                "databaseName": {
+                    "value": "[parameters('cosmosDBdatabase')]"
+                },
+                "collectionName": {
+                    "value": "fechoices"
+                },
+                "offerThroughput": {
+                    "value": 400
+                },
+                "partitionKey": {
+                    "value": "/UKPRN"
+                }
+            }
+        }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "cosmosCollectionFrameworks",
+        "type": "Microsoft.Resources/deployments",
+        "resourceGroup": "[parameters('sharedResourceGroup')]",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri": "[concat(variables('deploymentUrlBase'),'CosmosDb/cosmos-collection.json')]",
+                "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+                "accountName": {
+                    "value": "[parameters('cosmosDbAccount')]"
+                },
+                "databaseName": {
+                    "value": "[parameters('cosmosDBdatabase')]"
+                },
+                "collectionName": {
+                    "value": "frameworks"
+                },
+                "offerThroughput": {
+                    "value": 400
+                },
+                "partitionKey": {
+                    "value": "[parameters('frameworkCollectionPartitionKey')]"
+                }
+            }
+        }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "cosmosCollectionProgTypes",
+        "type": "Microsoft.Resources/deployments",
+        "resourceGroup": "[parameters('sharedResourceGroup')]",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri": "[concat(variables('deploymentUrlBase'),'CosmosDb/cosmos-collection.json')]",
+                "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+                "accountName": {
+                    "value": "[parameters('cosmosDbAccount')]"
+                },
+                "databaseName": {
+                    "value": "[parameters('cosmosDBdatabase')]"
+                },
+                "collectionName": {
+                    "value": "progtypes"
+                },
+                "offerThroughput": {
+                    "value": 400
+                },
+                "partitionKey": {
+                    "value": "[parameters('ProgTypeCollectionPartitionKey')]"
+                }
+            }
+        }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "cosmosCollectionTier1s",
+        "type": "Microsoft.Resources/deployments",
+        "resourceGroup": "[parameters('sharedResourceGroup')]",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri": "[concat(variables('deploymentUrlBase'),'CosmosDb/cosmos-collection.json')]",
+                "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+                "accountName": {
+                    "value": "[parameters('cosmosDbAccount')]"
+                },
+                "databaseName": {
+                    "value": "[parameters('cosmosDBdatabase')]"
+                },
+                "collectionName": {
+                    "value": "sectorsubjectareatier1s"
+                },
+                "offerThroughput": {
+                    "value": 400
+                },
+                "partitionKey": {
+                    "value": "[parameters('Tier1CollectionPartitionKey')]"
+                }
+            }
+        }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "cosmosCollectionTier1s",
+        "type": "Microsoft.Resources/deployments",
+        "resourceGroup": "[parameters('sharedResourceGroup')]",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri": "[concat(variables('deploymentUrlBase'),'CosmosDb/cosmos-collection.json')]",
+                "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+                "accountName": {
+                    "value": "[parameters('cosmosDbAccount')]"
+                },
+                "databaseName": {
+                    "value": "[parameters('cosmosDBdatabase')]"
+                },
+                "collectionName": {
+                    "value": "sectorsubjectareatier2s"
+                },
+                "offerThroughput": {
+                    "value": 400
+                },
+                "partitionKey": {
+                    "value": "[parameters('Tier2CollectionPartitionKey')]"
+                }
+            }
+        }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "cosmosCollectionStandards",
+        "type": "Microsoft.Resources/deployments",
+        "resourceGroup": "[parameters('sharedResourceGroup')]",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri": "[concat(variables('deploymentUrlBase'),'CosmosDb/cosmos-collection.json')]",
+                "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+                "accountName": {
+                    "value": "[parameters('cosmosDbAccount')]"
+                },
+                "databaseName": {
+                    "value": "[parameters('cosmosDBdatabase')]"
+                },
+                "collectionName": {
+                    "value": "standards"
+                },
+                "offerThroughput": {
+                    "value": 400
+                },
+                "partitionKey": {
+                    "value": "[parameters('StandardsCollectionPartitionKey')]"
+                }
+            }
+        }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "cosmosCollectionStandards",
+        "type": "Microsoft.Resources/deployments",
+        "resourceGroup": "[parameters('sharedResourceGroup')]",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri": "[concat(variables('deploymentUrlBase'),'CosmosDb/cosmos-collection.json')]",
+                "contentVersion": "1.0.0.0"
+            },
+            "parameters": {
+                "accountName": {
+                    "value": "[parameters('cosmosDbAccount')]"
+                },
+                "databaseName": {
+                    "value": "[parameters('cosmosDBdatabase')]"
+                },
+                "collectionName": {
+                    "value": "standardsectorcodes"
+                },
+                "offerThroughput": {
+                    "value": 400
+                },
+                "partitionKey": {
+                    "value": "[parameters('StandardSectorCodeCollectionPartitionKey')]"
+                }
+            }
+        }
+      }
   ],
   "outputs": {
     "functionAppName": {
