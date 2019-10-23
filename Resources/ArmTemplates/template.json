@@ -131,42 +131,6 @@
       "metadata": {
         "description": "Reference Data API service key"
       }
-    },
-    "frameworkCollectionPartitionKey": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the partition key for this environment..."
-      }
-    },
-    "ProgTypeCollectionPartitionKey": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the partition key for this environment."
-      }
-    },
-    "Tier1CollectionPartitionKey": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the partition key for this environment."
-      }
-    },
-    "Tier2CollectionPartitionKey": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the partition key for this environment."
-      }
-    },
-    "StandardsCollectionPartitionKey": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the partition key for this environment."
-      }
-    },
-    "StandardSectorCodeCollectionPartitionKey": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the partition key for this environment."
-      }
     }
   },
   "variables": {
@@ -398,9 +362,6 @@
               },
               "offerThroughput": {
                   "value": 400
-              },
-              "partitionKey": {
-                  "value": "[parameters('frameworkCollectionPartitionKey')]"
               }
           }
         }
@@ -428,9 +389,6 @@
             },
             "offerThroughput": {
                 "value": 400
-            },
-            "partitionKey": {
-                "value": "[parameters('ProgTypeCollectionPartitionKey')]"
             }
         }
       }
@@ -458,9 +416,6 @@
             },
             "offerThroughput": {
                 "value": 400
-            },
-            "partitionKey": {
-                "value": "[parameters('Tier1CollectionPartitionKey')]"
             }
         }
       }
@@ -488,9 +443,6 @@
             },
             "offerThroughput": {
                 "value": 400
-            },
-            "partitionKey": {
-                "value": "[parameters('Tier2CollectionPartitionKey')]"
             }
         }
       }
@@ -518,9 +470,6 @@
             },
             "offerThroughput": {
                 "value": 400
-            },
-            "partitionKey": {
-                "value": "[parameters('StandardsCollectionPartitionKey')]"
             }
         }
       }
@@ -548,9 +497,6 @@
             },
             "offerThroughput": {
                 "value": 400
-            },
-            "partitionKey": {
-                "value": "[parameters('StandardSectorCodeCollectionPartitionKey')]"
             }
         }
       }

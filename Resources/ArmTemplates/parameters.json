@@ -67,24 +67,6 @@
     },
     "referenceDataServiceApiKey": {
       "value": "__apimKey__"
-    },
-    "frameworkCollectionPartitionKey": {
-      "value": "__frameworkCollectionPartitionKey__"
-    },
-    "ProgTypeCollectionPartitionKey": {
-      "value": "__progtypeCollectionPartitionKey__"
-    },
-    "Tier1CollectionPartitionKey": {
-      "value": "__tier1sCollectionPartitionKey__"
-    },
-    "Tier2CollectionPartitionKey": {
-      "value": "__tier2sCollectionPartitionKey__"
-    },
-    "StandardsCollectionPartitionKey": {
-      "value": "__standardsCollectionPartitionKey__"
-    },
-    "StandardSectorCodeCollectionPartitionKey": {
-      "value": "__sectorcodesCollectionPartitionKey__"
     }
   }
 }
