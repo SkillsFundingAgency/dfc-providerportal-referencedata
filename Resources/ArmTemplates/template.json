@@ -222,7 +222,7 @@
             ]
           },
           "deployStagingSlot": {
-            "value": false
+            "value": true
           }
         }
       }
