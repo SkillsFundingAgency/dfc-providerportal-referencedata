@@ -176,6 +176,10 @@
                 "value": "1" 
               },
               {
+                "name": "FUNCTIONS_WORKER_RUNTIME",
+                "value": "dotnet"
+              },
+              {
                 "name": "CosmosDbSettings__EndpointUri",
                 "value": "[parameters('cosmosDBfqdn')]"
               },
