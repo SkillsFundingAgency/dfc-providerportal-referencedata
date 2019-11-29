@@ -1,0 +1,16 @@
+<policies>
+  <inbound>
+    <base />
+  </inbound>
+  <backend>
+    <retry condition="@(context.Response.StatusCode == 503)" count="15" interval="1">
+        <forward-request />
+    </retry>
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>
