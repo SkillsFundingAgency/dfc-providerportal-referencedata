@@ -3,6 +3,7 @@ using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Models;
 using Dfc.ProviderPortal.ReferenceData.Settings;
 using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,24 +41,42 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
             _cosmosDbCollectionSettings = cosmosDbCollectionSettings;
         }
 
-        public Task<IEnumerable<FeChoice>> GetAllAsync()
+        public async Task<IEnumerable<FeChoice>> GetAllAsync()
         {
             var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.FeChoicesCollectionId);
             var sql = $"SELECT * FROM c";
             var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
-            var client = _cosmosDbHelper.GetClient();
-            var results = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsEnumerable();
-            return Task.FromResult(results);
+
+            using (var client = _cosmosDbHelper.GetClient())
+            {
+                var query = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsDocumentQuery();
+
+                var results = new List<FeChoice>();
+
+                while (query.HasMoreResults)
+                {
+                    var response = await query.ExecuteNextAsync<FeChoice>();
+                    results.AddRange(response);
+                }
+
+                return results;
+            }
         }
 
-        public Task<FeChoice> GetByUKPRNAsync(int ukprn)
+        public async Task<FeChoice> GetByUKPRNAsync(int ukprn)
         {
             var uri = UriFactory.CreateDocumentCollectionUri(_cosmosDbSettings.DatabaseId, _cosmosDbCollectionSettings.FeChoicesCollectionId);
             var sql = $"SELECT * FROM c WHERE c.UKPRN = {ukprn}";
             var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
-            var client = _cosmosDbHelper.GetClient();
-            var results = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsEnumerable().FirstOrDefault();
-            return Task.FromResult(results);
+
+            using (var client = _cosmosDbHelper.GetClient())
+            {
+                var query = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsDocumentQuery();
+
+                var results = await query.ExecuteNextAsync();
+
+                return results.FirstOrDefault();
+            }
         }
     }
 }
