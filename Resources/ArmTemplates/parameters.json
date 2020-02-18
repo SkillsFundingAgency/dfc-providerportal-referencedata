@@ -51,7 +51,7 @@
       "value": "__referenceDataApiUrl__"
     },
     "referenceDataServiceApiKey": {
-      "value": "__apimKey__"
+      "value": "__ApimPublishCourseDirectoryKey__"
     }
   }
 }
