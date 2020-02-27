@@ -47,20 +47,18 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
             var sql = $"SELECT * FROM c";
             var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
 
-            using (var client = _cosmosDbHelper.GetClient())
+            var client = _cosmosDbHelper.GetClient();
+            var query = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsDocumentQuery();
+
+            var results = new List<FeChoice>();
+
+            while (query.HasMoreResults)
             {
-                var query = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsDocumentQuery();
-
-                var results = new List<FeChoice>();
-
-                while (query.HasMoreResults)
-                {
-                    var response = await query.ExecuteNextAsync<FeChoice>();
-                    results.AddRange(response);
-                }
-
-                return results;
+                var response = await query.ExecuteNextAsync<FeChoice>();
+                results.AddRange(response);
             }
+
+            return results;
         }
 
         public async Task<FeChoice> GetByUKPRNAsync(int ukprn)
@@ -69,14 +67,12 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
             var sql = $"SELECT * FROM c WHERE c.UKPRN = {ukprn}";
             var options = new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 };
 
-            using (var client = _cosmosDbHelper.GetClient())
-            {
-                var query = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsDocumentQuery();
+            var client = _cosmosDbHelper.GetClient();
+            var query = client.CreateDocumentQuery<FeChoice>(uri, sql, options).AsDocumentQuery();
 
-                var results = await query.ExecuteNextAsync();
+            var results = await query.ExecuteNextAsync();
 
-                return results.FirstOrDefault();
-            }
+            return results.FirstOrDefault();
         }
     }
 }

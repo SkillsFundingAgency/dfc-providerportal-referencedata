@@ -11,13 +11,15 @@ using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Helpers
 {
-    public class CosmosDbHelper : ICosmosDbHelper
+    public class CosmosDbHelper : ICosmosDbHelper, IDisposable
     {
         private readonly ICosmosDbSettings _settings;
+        private DocumentClient _client;
 
-        public CosmosDbHelper(IOptions<CosmosDbSettings> settings) : this(settings.Value)
+        public CosmosDbHelper(IOptions<CosmosDbSettings> settings, DocumentClient documentClient) : this(settings.Value)
         {
             Throw.IfNull(settings, nameof(settings));
+            _client = documentClient;
         }
 
         public CosmosDbHelper(CosmosDbSettings settings)
@@ -65,6 +67,15 @@ namespace Dfc.ProviderPortal.ReferenceData.Helpers
             return await client.CreateDocumentCollectionIfNotExistsAsync(uri, coll);
         }
 
+        public void Dispose()
+        {
+            if (_client != null)
+            {
+                _client.Dispose();
+                _client = null;
+            }
+        }
+
         public IEnumerable<T> DocumentsTo<T>(IEnumerable<Document> documents)
         {
             Throw.IfNull(documents, nameof(documents));
@@ -77,10 +88,7 @@ namespace Dfc.ProviderPortal.ReferenceData.Helpers
             return (T)(dynamic)document;
         }
 
-        public DocumentClient GetClient()
-        {
-            return new DocumentClient(new Uri(_settings.EndpointUri), _settings.PrimaryKey);
-        }
+        public DocumentClient GetClient() => _client;
 
         public Document GetDocumentById<T>(DocumentClient client, string collectionId, T id)
         {
