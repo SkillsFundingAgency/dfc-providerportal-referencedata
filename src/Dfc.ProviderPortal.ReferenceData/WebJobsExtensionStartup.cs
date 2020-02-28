@@ -4,6 +4,7 @@ using Dfc.ProviderPortal.ReferenceData.Helpers;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Services;
 using Dfc.ProviderPortal.ReferenceData.Settings;
+using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,10 +30,17 @@ namespace Dfc.ProviderPortal.ReferenceData
 
             //builder.Services.AddApplicationInsightsTelemetry(configuration);
 
+            var documentClient = new DocumentClient(new Uri(configuration.GetValue<string>("CosmosDbSettings:EndpointUri")), configuration.GetValue<string>("CosmosDbSettings:PrimaryKey"), new ConnectionPolicy()
+            {
+                ConnectionMode = ConnectionMode.Direct,
+                ConnectionProtocol = Protocol.Tcp
+            });
+
+            builder.Services.AddSingleton(documentClient);
             builder.Services.AddSingleton<IConfiguration>(configuration);
             builder.Services.Configure<CosmosDbSettings>(configuration.GetSection(nameof(CosmosDbSettings)));
             builder.Services.Configure<CosmosDbCollectionSettings>(configuration.GetSection(nameof(CosmosDbCollectionSettings)));
-            builder.Services.AddScoped<ICosmosDbHelper, CosmosDbHelper>();
+            builder.Services.AddSingleton<ICosmosDbHelper, CosmosDbHelper>();
             builder.Services.AddScoped<IProgTypeService, ProgTypeService>();
             builder.Services.AddScoped<IFeChoiceService, FeChoiceService>();
             builder.Services.AddScoped<IStandardSectorCodeService, StandardSectorCodeService>();
