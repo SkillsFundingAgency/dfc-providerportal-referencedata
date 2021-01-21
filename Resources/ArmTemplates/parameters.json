@@ -52,6 +52,9 @@
     },
     "referenceDataServiceApiKey": {
       "value": "__ApimPublishCourseDirectoryKey__"
+    },
+    "providerPortalApplicationInsights": {
+      "value": "__providerportalApplicationInsights__"
     }
   }
 }
