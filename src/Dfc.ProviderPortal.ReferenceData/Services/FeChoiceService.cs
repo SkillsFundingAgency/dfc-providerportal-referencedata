@@ -1,13 +1,13 @@
-﻿using Dfc.ProviderPortal.Packages;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Dfc.ProviderPortal.Packages;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Dfc.ProviderPortal.ReferenceData.Models;
 using Dfc.ProviderPortal.ReferenceData.Settings;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
 using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Services
 {
@@ -22,9 +22,6 @@ namespace Dfc.ProviderPortal.ReferenceData.Services
             IOptions<CosmosDbSettings> cosmosDbSettings,
             IOptions<CosmosDbCollectionSettings> cosmosDbCollectionSettings) : this(cosmosDbHelper, cosmosDbSettings.Value, cosmosDbCollectionSettings.Value)
         {
-            Throw.IfNull(cosmosDbHelper, nameof(cosmosDbHelper));
-            Throw.IfNull(cosmosDbSettings, nameof(cosmosDbSettings));
-            Throw.IfNull(cosmosDbCollectionSettings, nameof(cosmosDbCollectionSettings));
         }
 
         public FeChoiceService(

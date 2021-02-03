@@ -1,38 +1,27 @@
-using Dfc.ProviderPortal.Packages.AzureFunctions.DependencyInjection;
+using System.Threading.Tasks;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Functions
 {
-    public static class FeChoices
+    public class FeChoices
     {
-        [FunctionName("FeChoices")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/fe-choices")] HttpRequest req,
-            ILogger log,
-            [Inject] IFeChoiceService feChoiceService)
+        private readonly IFeChoiceService _feChoiceService;
+
+        public FeChoices(IFeChoiceService feChoiceService)
         {
-            try
-            {
-                var results = await feChoiceService.GetAllAsync();
+            _feChoiceService = feChoiceService;
+        }
 
-                if (results == null) new NotFoundResult();
-
-                return new JsonResult(results, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
-            }
-            catch (Exception e)
-            {
-                log.LogError(e, e.Message);
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
+        [FunctionName("FeChoices")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/fe-choices")] HttpRequest req)
+        {
+            var results = await _feChoiceService.GetAllAsync();
+            return new JsonResult(results);
         }
     }
 }
