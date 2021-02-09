@@ -1,40 +1,31 @@
-using Dfc.ProviderPortal.Packages.AzureFunctions.DependencyInjection;
+using System.Threading.Tasks;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Functions
 {
-    public static class ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeId
+    public class ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeId
     {
+        private readonly IApprenticeshipFrameworkService _apprenticeshipFrameworkService;
+
+        public ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeId(
+            IApprenticeshipFrameworkService apprenticeshipFrameworkService)
+        {
+            _apprenticeshipFrameworkService = apprenticeshipFrameworkService;
+        }
+
         [FunctionName("ApprenticeshipsFrameworksByFrameworkCodeAndProgTypeId")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/apprenticeship-frameworks/{frameworkCode}/prog-type/{progtypeId}")] HttpRequest req,
-            ILogger log,
-            [Inject] IApprenticeshipFrameworkService apprenticeshipFrameworkService,
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/apprenticeship-frameworks/{frameworkCode}/prog-type/{progTypeId}")] HttpRequest req,
             int frameworkCode,
             int progTypeId)
         {
-            try
-            {
-                var results = await apprenticeshipFrameworkService.GetApprenticeshipFrameworkByFrameworkCodeAndProgTypeIdAsync(frameworkCode, progTypeId);
+            var results = await _apprenticeshipFrameworkService.GetApprenticeshipFrameworkByFrameworkCodeAndProgTypeIdAsync(frameworkCode, progTypeId);
 
-                if (results == null) new NotFoundResult();
-
-                return new JsonResult(results, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
-            }
-            catch (Exception e)
-            {
-                log.LogError(e, e.Message);
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
+            return new JsonResult(results);
         }
     }
 }

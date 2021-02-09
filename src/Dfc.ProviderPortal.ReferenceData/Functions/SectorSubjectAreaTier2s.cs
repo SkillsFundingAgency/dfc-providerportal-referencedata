@@ -1,38 +1,29 @@
-using Dfc.ProviderPortal.Packages.AzureFunctions.DependencyInjection;
+using System.Threading.Tasks;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Functions
 {
-    public static class SectorSubjectAreaTier2s
+    public class SectorSubjectAreaTier2s
     {
-        [FunctionName("SectorSubjectAreaTier2s")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/sector-subject-area-tier-2s")] HttpRequest req,
-            ILogger log,
-            [Inject] ISectorSubjectAreaTier2Service sectorSubjectAreaTier2Service)
+        private readonly ISectorSubjectAreaTier2Service _sectorSubjectAreaTier2Service;
+
+        public SectorSubjectAreaTier2s(
+            ISectorSubjectAreaTier2Service sectorSubjectAreaTier2Service)
         {
-            try
-            {
-                var results = await sectorSubjectAreaTier2Service.GetAllAsync();
+            _sectorSubjectAreaTier2Service = sectorSubjectAreaTier2Service;
+        }
 
-                if (results == null) new NotFoundResult();
+        [FunctionName("SectorSubjectAreaTier2s")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/sector-subject-area-tier-2s")] HttpRequest req)
+        {
+            var results = await _sectorSubjectAreaTier2Service.GetAllAsync();
 
-                return new JsonResult(results, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
-            }
-            catch (Exception e)
-            {
-                log.LogError(e, e.Message);
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
+            return new JsonResult(results);
         }
     }
 }

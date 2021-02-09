@@ -1,39 +1,30 @@
-using Dfc.ProviderPortal.Packages.AzureFunctions.DependencyInjection;
+using System.Threading.Tasks;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Functions
 {
-    public static class ApprenticeshipsFrameworksByFrameworkCode
+    public class ApprenticeshipsFrameworksByFrameworkCode
     {
+        private readonly IApprenticeshipFrameworkService _apprenticeshipFrameworkService;
+
+        public ApprenticeshipsFrameworksByFrameworkCode(
+            IApprenticeshipFrameworkService apprenticeshipFrameworkService)
+        {
+            _apprenticeshipFrameworkService = apprenticeshipFrameworkService;
+        }
+
         [FunctionName("ApprenticeshipsFrameworksByFrameworkCode")]
-        public static async Task<IActionResult> Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/apprenticeship-frameworks/{frameworkCode}")] HttpRequest req,
-            ILogger log,
-            [Inject] IApprenticeshipFrameworkService apprenticeshipFrameworkService,
             int frameworkCode)
         {
-            try
-            {
-                var results = await apprenticeshipFrameworkService.GetApprenticeshipFrameworkByFrameworkCodeAsync(frameworkCode);
+            var results = await _apprenticeshipFrameworkService.GetApprenticeshipFrameworkByFrameworkCodeAsync(frameworkCode);
 
-                if (results == null) new NotFoundResult();
-
-                return new JsonResult(results, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
-            }
-            catch (Exception e)
-            {
-                log.LogError(e, e.Message);
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
+            return new JsonResult(results);
         }
     }
 }

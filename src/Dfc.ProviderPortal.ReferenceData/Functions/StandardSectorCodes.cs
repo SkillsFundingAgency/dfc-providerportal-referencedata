@@ -1,38 +1,28 @@
-using Dfc.ProviderPortal.Packages.AzureFunctions.DependencyInjection;
+using System.Threading.Tasks;
 using Dfc.ProviderPortal.ReferenceData.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Threading.Tasks;
 
 namespace Dfc.ProviderPortal.ReferenceData.Functions
 {
-    public static class StandardSectorCodes
+    public class StandardSectorCodes
     {
-        [FunctionName("StandardSectorCodes")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/standard-sector-codes")] HttpRequest req,
-            ILogger log,
-            [Inject] IStandardSectorCodeService standardSectorCodeService)
+        private readonly IStandardSectorCodeService _standardSectorCodeService;
+
+        public StandardSectorCodes(IStandardSectorCodeService standardSectorCodeService)
         {
-            try
-            {
-                var results = await standardSectorCodeService.GetAllAsync();
+            _standardSectorCodeService = standardSectorCodeService;
+        }
 
-                if (results == null) new NotFoundResult();
+        [FunctionName("StandardSectorCodes")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "referencedata/standard-sector-codes")] HttpRequest req)
+        {
+            var results = await _standardSectorCodeService.GetAllAsync();
 
-                return new JsonResult(results, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver() });
-            }
-            catch (Exception e)
-            {
-                log.LogError(e, e.Message);
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
+            return new JsonResult(results);
         }
     }
 }
