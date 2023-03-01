@@ -414,9 +414,6 @@
             },
             "offerThroughput": {
                 "value": 400
-            },
-            "partitionKey": {
-              "value": "/_partitionKey"
             }
         }
       }
