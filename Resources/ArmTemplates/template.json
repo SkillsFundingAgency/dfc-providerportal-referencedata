@@ -264,6 +264,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/UKPRN"
             }
         }
       }
@@ -291,6 +294,9 @@
               },
               "offerThroughput": {
                   "value": 400
+              },
+              "partitionKey": {
+                "value": "/_partitionKey"
               }
           }
         }
@@ -318,6 +324,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
@@ -345,6 +354,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
@@ -372,6 +384,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
@@ -399,6 +414,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
@@ -426,6 +444,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
