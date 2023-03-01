@@ -3,7 +3,8 @@
     <!--<TargetFramework>netstandard2.0</TargetFramework>-->
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
-    <AssemblyVersion>1.0.19186.1127</AssemblyVersion>
+	<_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
+	 <AssemblyVersion>1.0.19186.1127</AssemblyVersion>
     <FileVersion>1.0.19186.1127</FileVersion>
   </PropertyGroup>
   
