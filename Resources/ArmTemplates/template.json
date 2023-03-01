@@ -20,6 +20,12 @@
         "description": "Resource group the app service plan is in"
       }
     },
+    "providerPortalApplicationInsights": {
+      "type": "string",
+      "metadata": {
+        "description": "Application Insights Reference for Course Directory i.e. dfc-<env>-prov-as-ai"
+      }
+    },
     "storageConnectionString": {
       "type": "string",
       "metadata": {
@@ -161,19 +167,19 @@
             "value": [
               {
                 "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                "value": "[reference('pprefdataAppInsights').outputs.InstrumentationKey.value]"
+                "value": "[reference(resourceId(parameters('sharedResourceGroup'), 'Microsoft.Insights/components', parameters('providerPortalApplicationInsights')), '2015-05-01', 'Full').properties.InstrumentationKey]"
               },
               {
                 "name": "FUNCTIONS_EXTENSION_VERSION",
-                "value": "~4"
+                "value": "~3"
               },
               {
                 "name": "AzureWebJobsStorage",
                 "value": "[parameters('storageConnectionString')]"
               },
               { 
-                "name": "WEBSITE_RUN_FROM_PACKAGE", 
-                "value": "1" 
+                "name": "WEBSITE_RUN_FROM_PACKAGE",
+                "value": "1"
               },
               {
                 "name": "FUNCTIONS_WORKER_RUNTIME",
@@ -260,7 +266,7 @@
                 "value": 400
             },
             "partitionKey": {
-                "value": "/UKPRN"
+              "value": "/UKPRN"
             }
         }
       }
@@ -288,6 +294,9 @@
               },
               "offerThroughput": {
                   "value": 400
+              },
+              "partitionKey": {
+                "value": "/_partitionKey"
               }
           }
         }
@@ -315,6 +324,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
@@ -342,6 +354,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
@@ -369,6 +384,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
@@ -423,6 +441,9 @@
             },
             "offerThroughput": {
                 "value": 400
+            },
+            "partitionKey": {
+              "value": "/_partitionKey"
             }
         }
       }
