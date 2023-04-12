@@ -52,6 +52,9 @@
     },
     "referenceDataServiceApiKey": {
       "value": "not-a-real-api-key"
+    },
+    "providerPortalApplicationInsights":{
+      "value": "dfc-dev-prov-as-ai"
     }
   }
 }
