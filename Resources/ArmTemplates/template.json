@@ -120,9 +120,6 @@
       "apiVersion": "2017-05-10",
       "name": "pprefdataAppService",
       "type": "Microsoft.Resources/deployments",
-      "dependsOn": [
-        "pprefdataAppInsights"
-      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
