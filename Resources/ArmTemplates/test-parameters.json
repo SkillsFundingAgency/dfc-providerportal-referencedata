@@ -14,39 +14,6 @@
     "storageConnectionString": {
       "value": "DefaultEndpointsProtocol=https;AccountName=dfcfooprovstr;AccountKey=this_is_not_a_real_account==;EndpointSuffix=core.windows.net"
     },
-    "cosmosDbFqdn": {
-      "value": "https://dfc-foo-prov-cdb.documents.azure.com/"
-    },
-    "cosmosDbKey": {
-      "value": "not-a-real-key"
-    },
-    "cosmosDbAccount": {
-      "value": "myCosmosAccount"
-    },
-    "cosmosDbDatabase": {
-      "value": "mydb"
-    },
-    "cosmosDbCollectionFeChoices": {
-      "value": "fechoices"
-    },
-    "cosmosDbCollectionFrameworks": {
-      "value": "frameworks"
-    },
-    "cosmosDbCollectionProgTypes": {
-      "value": "progtypes"
-    },
-    "cosmosDbCollectionSsaTier1s": {
-      "value": "sectorsubjectareatier1s"
-    },
-    "cosmosDbCollectionSsaTier2s": {
-      "value": "sectorsubjectareatier2s"
-    },
-    "cosmosDbCollectionStandards": {
-      "value": "standards"
-    },
-    "cosmosDbCollectionStandardsSectorCodes": {
-      "value": "standardsectorcodes"
-    },
     "referenceDataServiceApiUrl": {
       "value": "https://apim-instance/referencedata/api/"
     },
@@ -55,6 +22,12 @@
     },
     "providerPortalApplicationInsights":{
       "value": "dfc-dev-prov-as-ai"
+    },
+    "workspaceName": {
+      "value": "aTestLogAnalyticsAccount"
+    },
+    "workspaceResourceGroup": {
+      "value": "aResourceGroup"
     }
   }
 }

@@ -14,7 +14,7 @@ resources:
     type: github
     name: SkillsFundingAgency/dfc-devops
     endpoint: 'GitHub (ESFA)'
-    ref: refs/tags/v1.5.0
+    ref: refs/tags/v1.16.0
 
 trigger:
   batch: true
@@ -32,7 +32,7 @@ pr:
 steps:
 
 # ARM template
-- template: AzureDevOpsTemplates/Build/dfc-arm-build.yml@dfc-devops
+- template: AzureDevOpsTemplates\Build\StepTemplates\dfc-arm-build.yml@dfc-devops
   parameters:
     ArmTemplateRoot: '$(System.DefaultWorkingDirectory)\Resources\ArmTemplates'
 
